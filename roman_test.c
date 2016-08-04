@@ -4,11 +4,7 @@
 
 START_TEST(test_roman)
 {
-#line 4
-	fail_unless(sum(3, 2) == 5, "sum function borked");
-	fail_unless(sum(-3, 2) == -1, "sum function borked");
-	fail_unless(sum(3, -2) == 1, "sum function borked");
-	fail_unless(sum(-3, -2) == -5, "sum function borked");
+	ck_assert_int_eq(roman2integer("III"),3);
 }
 END_TEST
 

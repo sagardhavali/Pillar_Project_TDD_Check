@@ -3,7 +3,7 @@
 
 int main(void) {
 
-	printf("%d\n", sum(3, 2));
+	printf("TDD of Roman Calculator using Check Framework \n");
 
 	return 0;
 }
