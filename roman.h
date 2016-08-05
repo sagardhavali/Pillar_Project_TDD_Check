@@ -11,5 +11,6 @@ int indexofletter(char);
 char * integer2roman(int);
 void postdigit(char*, int*, char, int);
 void predigit(char*, int*, char, char);
+char * romanAddition(char*, char*);
 
 #endif

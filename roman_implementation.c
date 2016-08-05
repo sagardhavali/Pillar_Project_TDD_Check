@@ -51,9 +51,12 @@ void predigit(char* answer, int* ind, char num1, char num2)
 
 char * integer2roman(int num)
 {
-	//int i=0;
-	static char answer[1000]={0};
+	int i=0;
+	static char answer[1000];
 	int ind=0;
+
+	for(i=0;i<1000;i++)
+		answer[i] = '\0';
 
 	while(num != 0)
 	{
@@ -144,5 +147,18 @@ char * integer2roman(int num)
 
 	return answer;
 }
+
+char * romanAddition(char* str1, char* str2)
+{
+	int val1 = roman2integer(str1);
+	int val2 = roman2integer(str2);
+	int val = val1 + val2;
+	static char * ans;
+	ans = integer2roman(val);
+
+	return ans;
+}
+
+
 
 

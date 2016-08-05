@@ -3,7 +3,7 @@
 
 int main(void) {
 
-	printf("TDD of Roman Calculator using Check Framework \n");
+	printf("Test Driven Development of Roman Calculator using Check Framework. \n");
 
 	return 0;
 }
