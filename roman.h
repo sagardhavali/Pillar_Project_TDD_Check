@@ -8,5 +8,6 @@
 
 int roman2integer(char *);
 int indexofletter(char);
+char * integer2roman(int);
 
 #endif

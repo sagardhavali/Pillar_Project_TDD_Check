@@ -2,24 +2,43 @@
 #include <check.h>
 #include "roman.h"
 
-START_TEST(test_roman)
+START_TEST(test_roman2integer)
 {
 	ck_assert_int_eq(roman2integer("III"),3);
+	ck_assert_int_eq(roman2integer("X"),10);
+	ck_assert_int_eq(roman2integer("XII"),12);
+	ck_assert_int_eq(roman2integer("XL"),40);
+}
+END_TEST
+
+START_TEST(test_integer2roman)
+{
+	ck_assert_str_eq(integer2roman(55),"LV");
+	ck_assert_str_eq(integer2roman(115),"CXV");
+	ck_assert_str_eq(integer2roman(99),"XCIX");
+	ck_assert_str_eq(integer2roman(48),"XLVIII");
 }
 END_TEST
 
 Suite * roman_suite(void)
 {
 	Suite *s;
-	TCase *tc_core;
+	TCase *tc_romanToInteger;
+	TCase *tc_integerToRoman;
 
 	s = suite_create("Roman");
 
-	/* Core Test Case */
-	tc_core = tcase_create("Core");
+	/* Test Case : Roman to Integer */
+	tc_romanToInteger = tcase_create("Roman2Integer");
 
-	tcase_add_test(tc_core, test_roman);
-	suite_add_tcase(s,tc_core);
+	tcase_add_test(tc_romanToInteger, test_roman2integer);
+	suite_add_tcase(s,tc_romanToInteger);
+
+	/* Test Case : Integer to Roman */
+	tc_integerToRoman = tcase_create("Integer2Roman");
+
+	tcase_add_test(tc_integerToRoman, test_integer2roman);
+	suite_add_tcase(s, tc_integerToRoman);
 
 	return s;
 }

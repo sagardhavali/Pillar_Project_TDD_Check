@@ -35,3 +35,114 @@ int indexofletter(char x)
 		}
 	return -1;
 }
+
+void postdigit(char* answer, int* ind, char c, int n)
+{
+	int i=0;
+	for(i=0;i<n;i++)
+		answer[(*ind)++] = c;
+}
+
+void predigit(char* answer, int* ind, char num1, char num2)
+{
+	answer[(*ind)++] = num1;
+	answer[(*ind)++] = num2;
+}
+
+char * integer2roman(int num)
+{
+	//int i=0;
+	static char answer[1000]={0};
+	int ind=0;
+
+	while(num != 0)
+	{
+		if(num >= 1000)
+		{
+			postdigit(answer, &ind, 'M', num/1000);
+			num = num - (num/1000)*1000;
+		}
+		else if(num >= 500)
+		{
+			if(num < 900)
+			{
+				postdigit(answer, &ind, 'D', num/500);
+				num = num - (num/500)*500;
+			}
+			else
+			{
+				predigit(answer, &ind, 'C','M');
+				num = num - 900;
+			}
+		}
+		else if(num >= 100)
+		{
+			if(num < 400)
+			{
+				postdigit(answer, &ind, 'C', num/100);
+				num = num - (num/100)*100;
+			}
+			else
+			{
+				predigit(answer, &ind, 'C','D');
+				num = num - 400;
+			}
+		}
+		else if(num >= 50)
+		{
+			if(num < 90)
+			{
+				postdigit(answer, &ind, 'L', num/50);
+				num = num - (num/50)*50;
+			}
+			else
+			{
+				predigit(answer, &ind, 'X','C');
+				num = num - 90;
+			}
+		}
+		else if(num >= 10)
+		{
+			if(num < 40)
+			{
+				postdigit(answer, &ind, 'X', num/10);
+				num = num - (num/10)*10;
+			}
+			else
+			{
+				predigit(answer, &ind, 'X','L');
+				num = num - 40;
+			}
+		}
+		else if(num >= 5)
+		{
+			if(num < 9)
+			{
+				postdigit(answer, &ind, 'V', num/5);
+				num = num - (num/5)*5;
+			}
+			else
+			{
+				predigit(answer, &ind, 'I','X');
+				num = num - 9;
+			}
+		}
+		else if(num >= 1)
+		{
+			if(num < 4)
+			{
+				postdigit(answer, &ind, 'I', num/1);
+				num = num - (num/1)*1;
+			}
+			else
+			{
+				predigit(answer, &ind, 'I','V');
+				num = num - 4;
+			}
+		}
+	}
+
+	return answer;
+}
+
+
