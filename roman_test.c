@@ -38,6 +38,81 @@ START_TEST(test_roman_subtraction)
 }
 END_TEST
 
+START_TEST(test_roman_validate)
+{
+	ck_assert_int_eq(isvalidroman("I"),1);
+	ck_assert_int_eq(isvalidroman("II"),1);
+	ck_assert_int_eq(isvalidroman("III"),1);
+	ck_assert_int_eq(isvalidroman("IV"),1);
+	ck_assert_int_eq(isvalidroman("V"),1);
+	ck_assert_int_eq(isvalidroman("VI"),1);
+	ck_assert_int_eq(isvalidroman("VII"),1);
+	ck_assert_int_eq(isvalidroman("VIII"),1);
+	ck_assert_int_eq(isvalidroman("IX"),1);
+	ck_assert_int_eq(isvalidroman("X"),1);
+	ck_assert_int_eq(isvalidroman("XI"),1);
+	ck_assert_int_eq(isvalidroman("XII"),1);
+	ck_assert_int_eq(isvalidroman("XIII"),1);
+	ck_assert_int_eq(isvalidroman("XIV"),1);
+	ck_assert_int_eq(isvalidroman("XV"),1);
+	ck_assert_int_eq(isvalidroman("XVI"),1);
+	ck_assert_int_eq(isvalidroman("XVII"),1);
+	ck_assert_int_eq(isvalidroman("XVIII"),1);
+	ck_assert_int_eq(isvalidroman("XIX"),1);	
+	ck_assert_int_eq(isvalidroman("XX"),1);
+	ck_assert_int_eq(isvalidroman("XXI"),1);
+	ck_assert_int_eq(isvalidroman("XXII"),1);
+	ck_assert_int_eq(isvalidroman("XXIII"),1);
+	ck_assert_int_eq(isvalidroman("XXIV"),1);
+	ck_assert_int_eq(isvalidroman("XXV"),1);
+	ck_assert_int_eq(isvalidroman("XXVI"),1);
+	ck_assert_int_eq(isvalidroman("XXVII"),1);
+	ck_assert_int_eq(isvalidroman("XXVIII"),1);
+	ck_assert_int_eq(isvalidroman("XXIX"),1);
+	ck_assert_int_eq(isvalidroman("XXX"),1);
+	ck_assert_int_eq(isvalidroman("XXXI"),1);
+	ck_assert_int_eq(isvalidroman("XXXII"),1);
+	ck_assert_int_eq(isvalidroman("XXXIII"),1);
+	ck_assert_int_eq(isvalidroman("XXXIV"),1);
+	ck_assert_int_eq(isvalidroman("XXXV"),1);
+	ck_assert_int_eq(isvalidroman("XXXVI"),1);
+	ck_assert_int_eq(isvalidroman("XXXVII"),1);
+	ck_assert_int_eq(isvalidroman("XXXVIII"),1);
+	ck_assert_int_eq(isvalidroman("XXXIX"),1);
+	ck_assert_int_eq(isvalidroman("XL"),1);
+	ck_assert_int_eq(isvalidroman("XLI"),1);
+	ck_assert_int_eq(isvalidroman("XLII"),1);
+	ck_assert_int_eq(isvalidroman("XLIII"),1);
+	ck_assert_int_eq(isvalidroman("XLIV"),1);
+	ck_assert_int_eq(isvalidroman("XLV"),1);
+	ck_assert_int_eq(isvalidroman("XLVI"),1);
+	ck_assert_int_eq(isvalidroman("XLVII"),1);
+	ck_assert_int_eq(isvalidroman("XLVIII"),1);
+	ck_assert_int_eq(isvalidroman("XLIX"),1);
+	ck_assert_int_eq(isvalidroman("L"),1);
+	ck_assert_int_eq(isvalidroman("XC"),1);
+	ck_assert_int_eq(isvalidroman("XCI"),1);
+	ck_assert_int_eq(isvalidroman("XCII"),1);
+	ck_assert_int_eq(isvalidroman("XCIII"),1);
+	ck_assert_int_eq(isvalidroman("XCIV"),1);
+	ck_assert_int_eq(isvalidroman("XCV"),1);
+	ck_assert_int_eq(isvalidroman("XCVI"),1);
+	ck_assert_int_eq(isvalidroman("XCVII"),1);
+	ck_assert_int_eq(isvalidroman("XCVIII"),1);
+	ck_assert_int_eq(isvalidroman("XCIX"),1);
+	ck_assert_int_eq(isvalidroman("C"),1);
+	ck_assert_int_eq(isvalidroman("CC"),1);
+	ck_assert_int_eq(isvalidroman("CCC"),1);
+	ck_assert_int_eq(isvalidroman("CD"),1);
+	ck_assert_int_eq(isvalidroman("D"),1);
+	ck_assert_int_eq(isvalidroman("DC"),1);
+	ck_assert_int_eq(isvalidroman("DCC"),1);
+	ck_assert_int_eq(isvalidroman("DCCC"),1);
+	ck_assert_int_eq(isvalidroman("CM"),1);
+	ck_assert_int_eq(isvalidroman("M"),1);
+}
+END_TEST 
+
 Suite * roman_suite(void)
 {
 	Suite *s;
@@ -45,6 +120,7 @@ Suite * roman_suite(void)
 	TCase *tc_integerToRoman;
 	TCase *tc_roman_addition;
 	TCase *tc_roman_subtraction;
+	TCase *tc_roman_validate;
 
 	s = suite_create("Roman");
 
@@ -72,6 +148,12 @@ Suite * roman_suite(void)
 	tcase_add_test(tc_roman_subtraction, test_roman_subtraction);
 	suite_add_tcase(s, tc_roman_subtraction);
 
+	/* Test Case : Roman number validation */
+	tc_roman_validate = tcase_create("Roman_Validate");
+
+	tcase_add_test(tc_roman_validate, test_roman_validate);
+	suite_add_tcase(s, tc_roman_validate);
+
 	return s;
 }
 
@@ -84,7 +166,7 @@ int main(void)
 	s = roman_suite();
 	sr = srunner_create(s);
 
-	srunner_run_all(sr, CK_NORMAL);
+	srunner_run_all(sr, CK_VERBOSE);
 	number_failed = srunner_ntests_failed(sr);
 	srunner_free(sr);
 

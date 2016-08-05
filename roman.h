@@ -13,5 +13,6 @@ void postdigit(char*, int*, char, int);
 void predigit(char*, int*, char, char);
 char * romanAddition(char*, char*);
 char * romanSubtraction(char*, char*);
+bool isvalidroman(char *);
 
 #endif

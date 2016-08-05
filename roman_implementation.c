@@ -173,5 +173,131 @@ char * romanSubtraction(char* str1, char* str2)
 	return res;
 }
 
+bool isvalidroman(char *str)
+{
+	int len = strlen(str);
+	int i=0, prev=0, pres=0, count=0;
+	int first_M = 0;
+	char temp[len-1];
+	//int temp_len=0;
 
+	if(str[0] == 'M')
+		first_M = 1;
+	else
+		first_M = 0;
 
+	for(i=0;i<len;i++)
+	{
+		pres = indexofletter(str[i]);
+		if(pres == -1)
+			return false;
+		count++;
+		if(prev == pres)
+		{
+			if(pres%2 == 1)
+				return false;
+			if(pres%2 == 0 && count == 2 && str[i] == 'M' && first_M == 0)
+				return false;
+		}
+		else
+			count = 1;
+		if(count >3 && str[i] != 'M')
+			return false;		
+		prev = pres;
+	}
+		
+	prev = indexofletter(str[0]);
+	count = 0;
+	for(i=1;i<len;i++)
+	{
+		pres = indexofletter(str[i]);
+		if(pres == prev)
+			count++;
+		if(pres > prev && count == 1)
+			return false;	
+	}
+
+	prev = 0;
+	pres = 0;
+	switch(str[0])
+	{
+		case 'I' :	if(len == 2 && (indexofletter(str[1]) > (indexofletter(str[0])+2)))
+						return false;					
+					else if(len > 2 && str[2] != 'I' && (indexofletter(str[2]) >= indexofletter(str[0])))
+						return false;
+					else
+						return true;
+
+		case 'X' :	if(len == 2 && (indexofletter(str[1]) > (indexofletter(str[0])+2)))
+						return false;
+					else if(len > 2)
+					{						
+						if(str[1] == 'D' || str[1] == 'M')
+							return false;									
+						if(indexofletter(str[2]) == indexofletter(str[0]))
+						{
+							if(str[1] != 'I' && str[1] != 'X')
+								return false;
+						}
+						if(indexofletter(str[2]) > indexofletter(str[0]))
+							return false;
+						for(i=2;i<len;i++)
+							if(indexofletter(str[i]) > indexofletter(str[0]))
+								return false; 
+						return true;
+					}
+					else
+						return true;
+
+		case 'C' :	if(len == 2 && (indexofletter(str[1]) > (indexofletter(str[0])+2)))
+						return false;
+					else if(len > 2 )
+					{
+						if (indexofletter(str[2]) == indexofletter(str[0]) && str[1] != 'C')
+							return false;						
+						if (indexofletter(str[2]) > indexofletter(str[0]))
+							return false;
+						else
+							return true;
+					}
+					else
+						return true;
+
+		case 'V' :	for(i=1;i<len;i++)
+						if(indexofletter(str[i]) >= indexofletter(str[0]))
+							return false;		
+					return true;
+
+		case 'L' :	for(i=1;i<len;i++)
+						if(indexofletter(str[i]) >= indexofletter(str[0]))
+							return false;
+					if(len > 3 && (indexofletter(str[3]) >= indexofletter(str[1])))
+						return false;
+					strncpy(temp,str+1,len-1);
+					temp[len-1] = '\0';					
+					return isvalidroman(temp);
+
+		case 'D' :	strncpy(temp,str+1,len-1);
+					temp[len-1] = '\0';					
+					return isvalidroman(temp);
+
+		case 'M' : 	count = 1;
+					for(i=1;i<len;i++)
+					{
+						if(str[i-1] == str[i])
+							count++;
+						else
+							count = 1;
+						if(count > 4)
+							return false;
+					}
+					strncpy(temp,str+1,len-1);
+					temp[len-1] = '\0';					
+					return isvalidroman(temp);
+					break;
+	
+	
+	}
+	
+	return true;
+}
