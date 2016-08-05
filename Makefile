@@ -20,4 +20,4 @@ roman_test.o: roman_test.c roman.h
 	gcc $(CFLAGS) -c roman_test.c
 
 clean:
-	rm roman roman.o roman_implementation.o roman-test roman_test.o
+	rm -f roman roman.o roman_implementation.o roman-test roman_test.o

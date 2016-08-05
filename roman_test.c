@@ -29,12 +29,22 @@ START_TEST(test_roman_addition)
 }
 END_TEST
 
+START_TEST(test_roman_subtraction)
+{	
+	ck_assert_str_eq(romanSubtraction("XX","X"),"X");
+	ck_assert_str_eq(romanSubtraction("XX","II"),"XVIII");
+	ck_assert_str_eq(romanSubtraction("C","I"),"XCIX");	
+	ck_assert_str_eq(romanSubtraction("II","II"),"NULL");
+}
+END_TEST
+
 Suite * roman_suite(void)
 {
 	Suite *s;
 	TCase *tc_romanToInteger;
 	TCase *tc_integerToRoman;
 	TCase *tc_roman_addition;
+	TCase *tc_roman_subtraction;
 
 	s = suite_create("Roman");
 
@@ -55,6 +65,12 @@ Suite * roman_suite(void)
 
 	tcase_add_test(tc_roman_addition, test_roman_addition);
 	suite_add_tcase(s, tc_roman_addition);
+
+	/* Test Case : Roman Subtraction */
+	tc_roman_subtraction = tcase_create("Roman_Subtraction");
+
+	tcase_add_test(tc_roman_subtraction, test_roman_subtraction);
+	suite_add_tcase(s, tc_roman_subtraction);
 
 	return s;
 }

@@ -55,9 +55,12 @@ char * integer2roman(int num)
 	static char answer[1000];
 	int ind=0;
 
+	if(num == 0)
+		return "NULL";
+
 	for(i=0;i<1000;i++)
 		answer[i] = '\0';
-
+	
 	while(num != 0)
 	{
 		if(num >= 1000)
@@ -159,6 +162,16 @@ char * romanAddition(char* str1, char* str2)
 	return ans;
 }
 
+char * romanSubtraction(char* str1, char* str2)
+{
+	int val1 = roman2integer(str1);
+	int val2 = roman2integer(str2);
+	int val = val1 - val2;
+	static char * res;
+	res = integer2roman(val);
+
+	return res;
+}
 
 
 
