@@ -9,5 +9,7 @@
 int roman2integer(char *);
 int indexofletter(char);
 char * integer2roman(int);
+void postdigit(char*, int*, char, int);
+void predigit(char*, int*, char, char);
 
 #endif
