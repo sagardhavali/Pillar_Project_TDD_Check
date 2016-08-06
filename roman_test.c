@@ -125,6 +125,22 @@ START_TEST(test_roman_validate_1)
 }
 END_TEST
 
+START_TEST(test_roman_addition_limits)
+{
+	ck_assert_str_eq(romanAddition("IIII","II"),"Arg 1 Not Valid");
+	ck_assert_str_eq(romanAddition("III","XLC"),"Arg 2 Not Valid");
+	ck_assert_str_eq(romanAddition("MMMMCMXCIX","I"),"Sum exceeds upper limit");
+}
+END_TEST
+
+START_TEST(test_roman_subtraction_limits)
+{
+	ck_assert_str_eq(romanAddition("IIII","II"),"Arg 1 Not Valid");
+	ck_assert_str_eq(romanAddition("III","XLC"),"Arg 2 Not Valid");
+	ck_assert_str_eq(romanSubtraction("X","XX"),"Difference is negative");
+}
+END_TEST
+
 Suite * roman_suite(void)
 {
 	Suite *s;
@@ -134,6 +150,8 @@ Suite * roman_suite(void)
 	TCase *tc_roman_subtraction;
 	TCase *tc_roman_validate;
 	TCase *tc_roman_validate_1;
+	TCase *tc_roman_addition_limits;
+	TCase *tc_roman_subtraction_limits;
 
 	s = suite_create("Roman");
 
@@ -172,6 +190,18 @@ Suite * roman_suite(void)
 	
 	tcase_add_test(tc_roman_validate_1, test_roman_validate_1);
 	suite_add_tcase(s, tc_roman_validate_1);
+
+	/* Test Case : Roman Addition, Testing Limits */
+	tc_roman_addition_limits = tcase_create("Roman_Addition_Limits");
+
+	tcase_add_test(tc_roman_addition_limits, test_roman_addition_limits);
+	suite_add_tcase(s, tc_roman_addition_limits);
+
+	/* Test Case : Roman Subtraction, Testing Limits */
+	tc_roman_subtraction_limits = tcase_create("Roman_Subtraction_Limits");
+
+	tcase_add_test(tc_roman_subtraction_limits, test_roman_subtraction_limits);
+	suite_add_tcase(s, tc_roman_subtraction_limits);
 
 	return s;
 }

@@ -154,10 +154,22 @@ char * integer2roman(int num)
 
 char * romanAddition(char* str1, char* str2)
 {
-	int val1 = roman2integer(str1);
-	int val2 = roman2integer(str2);
-	int val = val1 + val2;
+	int val1, val2, val; 
 	static char * ans;
+
+	if(!isvalidroman(str1))
+		return "Arg 1 Not Valid";
+
+	if(!isvalidroman(str2))
+		return "Arg 2 Not Valid";
+
+	val1 = roman2integer(str1);
+	val2 = roman2integer(str2);	
+	val = val1 + val2;
+
+	if(val > 4999)
+		return "Sum exceeds upper limit";	
+
 	ans = integer2roman(val);
 
 	return ans;
@@ -165,10 +177,22 @@ char * romanAddition(char* str1, char* str2)
 
 char * romanSubtraction(char* str1, char* str2)
 {
-	int val1 = roman2integer(str1);
-	int val2 = roman2integer(str2);
-	int val = val1 - val2;
+	int val1, val2, val; 
 	static char * res;
+
+	if(!isvalidroman(str1))
+		return "Arg 1 Not Valid";
+
+	if(!isvalidroman(str2))
+		return "Arg 2 Not Valid";
+
+	val1 = roman2integer(str1);
+	val2 = roman2integer(str2);	
+	val = val1 - val2;
+
+	if(val < 0)
+		return "Difference is negative";
+
 	res = integer2roman(val);
 
 	return res;
