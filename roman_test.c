@@ -113,6 +113,18 @@ START_TEST(test_roman_validate)
 }
 END_TEST 
 
+START_TEST(test_roman_validate_1)
+{
+	ck_assert_int_eq(isvalidroman("IIII"),0);
+	ck_assert_int_eq(isvalidroman("IXI"),0);
+	ck_assert_int_eq(isvalidroman("XXIXX"),0);
+	ck_assert_int_eq(isvalidroman("LIXI"),0);
+	ck_assert_int_eq(isvalidroman("XLIXI"),0);
+	ck_assert_int_eq(isvalidroman("XLC"),0);
+
+}
+END_TEST
+
 Suite * roman_suite(void)
 {
 	Suite *s;
@@ -121,6 +133,7 @@ Suite * roman_suite(void)
 	TCase *tc_roman_addition;
 	TCase *tc_roman_subtraction;
 	TCase *tc_roman_validate;
+	TCase *tc_roman_validate_1;
 
 	s = suite_create("Roman");
 
@@ -153,6 +166,12 @@ Suite * roman_suite(void)
 
 	tcase_add_test(tc_roman_validate, test_roman_validate);
 	suite_add_tcase(s, tc_roman_validate);
+
+	/* Test Case: Roman number Validation for false numbers */
+	tc_roman_validate_1 = tcase_create("Roman_Validate_1");
+	
+	tcase_add_test(tc_roman_validate_1, test_roman_validate_1);
+	suite_add_tcase(s, tc_roman_validate_1);
 
 	return s;
 }

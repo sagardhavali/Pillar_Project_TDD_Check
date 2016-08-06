@@ -2,6 +2,7 @@
 
 char roman[] = "IVXLCDM";
 int decimal[] = {1,5,10,50,100,500,1000};
+char *lookup[59] = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX",	 "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL", "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX" };
 
 int roman2integer(char *str )
 {
@@ -223,12 +224,24 @@ bool isvalidroman(char *str)
 	{
 		case 'I' :	if(len == 2 && (indexofletter(str[1]) > (indexofletter(str[0])+2)))
 						return false;					
-					else if(len > 2 && str[2] != 'I' && (indexofletter(str[2]) >= indexofletter(str[0])))
-						return false;
+					else if(len > 2)
+					{
+						if(indexofletter(str[2]) == indexofletter(str[0]) && str[1] != 'I')
+							return false;
+						if(indexofletter(str[2]) > indexofletter(str[0]))
+							return false;
+					}
 					else
 						return true;
 
-		case 'X' :	if(len == 2 && (indexofletter(str[1]) > (indexofletter(str[0])+2)))
+		case 'X' :	for(i=1;i<59;i++)
+					{	
+						if(!strcmp(str,lookup[i]))
+							return true;
+					}
+					return false;
+
+					/*if(len == 2 && (indexofletter(str[1]) > (indexofletter(str[0])+2)))
 						return false;
 					else if(len > 2)
 					{						
@@ -247,7 +260,7 @@ bool isvalidroman(char *str)
 						return true;
 					}
 					else
-						return true;
+						return true;*/
 
 		case 'C' :	if(len == 2 && (indexofletter(str[1]) > (indexofletter(str[0])+2)))
 						return false;
